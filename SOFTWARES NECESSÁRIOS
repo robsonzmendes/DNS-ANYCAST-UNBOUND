@@ -1,1 +1,52 @@
 
+## DEBIAN 8.11	https://cdimage.debian.org/cdimage/archive/8.11.0/amd64/iso-cd/debian-8.11.0-amd64-netinst.iso
+## QUAGUA
+## UNBOUND
+
+## ATUALIZAR O DEBIAN
+apt-get update
+apt-get upgrade
+
+apt-get install quagga
+cp /usr/share/doc/quagga/examples/* /etc/quagga
+
+mv /etc/quagga/zebra.conf.sample /etc/quagga/zebra.conf
+mv /etc/quagga/ripd.conf.sample /etc/quagga/ripd.conf
+mv /etc/quagga/ospfd.conf.sample /etc/quagga/ospfd.conf
+mv /etc/quagga/bgpd.conf.sample /etc/quagga/bgpd.conf
+
+## Editar o arquivo
+nano /etc/quagga/daemons
+  zebra=yes
+  ripd=yes
+  ospfd=yes
+
+chmod -R 777  /etc/quagga/
+  
+/etc/init.d/quagga restart
+## Instalar telnet para acesso ao Zebra
+apt-get install telnet
+
+## Instalar Modulo Vlan (Quando o Ambiente Necessitar Apenas)
+apt-get install vlan
+modprobe 8021q
+##Criando Vlan
+vconfig add eth0 127
+
+## Quem Tiver alguma duvida tem esse tutorial bem explicado
+https://stato.blog.br/wordpress/criando-e-configurando-vlans-no-linux/
+
+
+
+
+## Instalar Unbound
+apt-get install unbound
+cd /etc/unbound/
+mv unbound.conf unbound.conf.old
+
+
+
+
+
+
+
